@@ -44,7 +44,7 @@ public class StudentRestController {
     }
 
 
-    /* Student Lisätään "student": "nimi" */
+    // Student Lisätään "student": "nimi"
 
     @PostMapping("addstudent") 
     public String addStudent(@RequestBody Student student){
@@ -53,7 +53,7 @@ public class StudentRestController {
 
     }
 
-      /* Course Lisätään "course": "nimi" */
+    // Course Lisätään "course": "nimi"
 
     @PostMapping("addcourse")
     public String addCourse(@RequestBody Course cours){
