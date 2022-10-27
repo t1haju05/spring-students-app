@@ -4,28 +4,29 @@ import com.lopputyo.lopputyo.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.lopputyo.lopputyo.services.StudentService;
+import com.lopputyo.lopputyo.services.Services;
 
 import java.util.List;
 
 @RestController
 public class StudentRestController {
+    
     @Autowired
-    StudentService myStudentService;
+    Services myService;
 
     @GetMapping("students")
-    public List<student> getStudents(){
-        return myStudentService.getStudents();
+    public List<Student> getStudents(){
+        return myService.getStudents();
     }
 
-    @GetMapping("students/{course}")
-    public List<student> getStudentCourses(@PathVariable String course) {
-        return myStudentService.getStudentsByCourse(course);
+    @GetMapping("courses")
+    public List<Course> getCourse() {
+        return myService.getCourses();
     }
 
     @PostMapping("addstudent")
-    public String addStudent(@RequestBody student Student){
-        myStudentService.addStudent(Student);
-        return "";
+    public Student addStudent(@RequestBody Student student){
+        myService.addStudent(student);
+        return student;
     }
 }

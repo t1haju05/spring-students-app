@@ -1,35 +1,27 @@
 package com.lopputyo.lopputyo.data;
+import java.util.ArrayList;
+import java.util.List;
 
-public class course {
+public class Course {
     private int id;
-    private String courseName;
-    private String courseType;
-
+    private String name;
+    public List<Student> students = new ArrayList<>();
     private static int count = 0;
 
-    public course(String name, String type){
-        this.courseName = name;
-        this.courseType = type;
+    public Course(String name){
         this.id = count++;
+        this.name = name;
     }
 
-    public course(){
-        this("","");
-    }
-
-    public String getCourseName(){
-        return this.courseName;
-    }
-    public void setCourseName(String course){
-        this.courseName = course;
-    }
-    public String getCourseType(){
-        return this.courseType;
-    }
-    public void setCourseType(String type){
-        this.courseType = type;
-    }
-    public int getCourseId(){
+    public int getId(){
         return this.id;
+    }
+
+    public String getCourse() {
+        return this.name;
+    }
+
+    public void setCourse(String name){
+        this.name = name;
     }
 }
