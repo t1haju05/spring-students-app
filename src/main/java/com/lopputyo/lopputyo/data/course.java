@@ -8,6 +8,10 @@ public class Course {
     public List<Student> students = new ArrayList<>();
     private static int count = 0;
 
+    public Course(){
+        this("");
+    }
+
     public Course(String name){
         this.id = count++;
         this.name = name;
@@ -23,5 +27,13 @@ public class Course {
 
     public void setCourse(String name){
         this.name = name;
+    }
+
+    public void setStudents(Student student){
+        this.students.add(student);
+    }
+
+    public void removeStudents(Student student){
+        this.students.remove(student);
     }
 }
