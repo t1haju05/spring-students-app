@@ -3,9 +3,6 @@ package com.lopputyo.lopputyo.services;
 import com.lopputyo.lopputyo.data.Course;
 import com.lopputyo.lopputyo.data.Student;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,29 +10,15 @@ import java.util.ArrayList;
 
 @Service
 public class Services {
+    @Autowired
+    FileService myFileService;
 
     public List<Student> students = new ArrayList<>();
     public List<Course> courses = new ArrayList<>();
 
     public Services() {
-        students.add(new Student("Adde"));
-        students.add(new Student("Jere"));
-        students.add(new Student("Liisa"));
-        students.add(new Student("Tarja"));
-        students.add(new Student("Huovinen"));
-
-        Course course1 = new Course("Äidinkieli");
-        Course course2 = new Course("Ohjelmointi");
-
-        course1.students.add(students.get(0));
-        course1.students.add(students.get(1));
-        course1.students.add(students.get(4));
-
-        course2.students.add(students.get(3));
-        course2.students.add(students.get(2));
-
-        courses.add(course1);
-        courses.add(course2);
+        courses = myFileService.readCoursesFromFile();
+        students = myFileService.readStudentsFromFile();
     }
 
     public List<Student> getStudents() {
@@ -43,10 +26,9 @@ public class Services {
     }
 
     public void removeStudent(String studentName) {
-        for (Student student : students) {
-            if(student.getStudent().equals(studentName)){
-                int id = student.getId();
-                students.remove(id);
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getStudent().equals(studentName)) {
+                students.remove(students.get(i));
             }
         }
     }
@@ -56,10 +38,9 @@ public class Services {
     }
 
     public void removeCourse(String courseName) {
-        for (Course course : courses) {
-            if(course.getCourse().equals(courseName)){
-                int id = course.getId();
-                courses.remove(id);
+        for (int i = 0; i < courses.size(); i++) {
+            if (courses.get(i).getCourse().equals(courseName)) {
+                courses.remove(courses.get(i));
             }
         }
     }
@@ -134,5 +115,13 @@ public class Services {
                 }
             }
         }
+    }
+
+    public void saveStudentsToFile() {
+        myFileService.writeStudentsToFile(students);
+    }
+
+    public void saveCoursesToFile() {
+        myFileService.writeCoursesToFile(courses);
     }
 }
