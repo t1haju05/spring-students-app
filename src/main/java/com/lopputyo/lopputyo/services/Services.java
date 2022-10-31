@@ -17,8 +17,28 @@ public class Services {
     public List<Course> courses = new ArrayList<>();
 
     public Services() {
-        courses = myFileService.readCoursesFromFile();
-        students = myFileService.readStudentsFromFile();
+        /* You can add students and courses from here if you uncomment
+         * students.add(new Student("name1"));
+         * students.add(new Student("name2"));
+         * students.add(new Student("name3"));
+         * students.add(new Student("name4"));
+         * 
+         * Course course1 = new Course("Cloud");
+         * Course course2 = new Course("Programming");
+         * 
+         * course1.students.add(students.get(0));
+         * course1.students.add(students.get(1));
+         * course1.students.add(students.get(4));
+         * 
+         * course2.students.add(students.get(3));
+         * course2.students.add(students.get(2));
+         * 
+         * courses.add(course1);
+         * courses.add(course2);
+         */
+        FileService fs = new FileService();
+        courses = fs.readCoursesFromFile();
+        students = fs.readStudentsFromFile();
     }
 
     public List<Student> getStudents() {

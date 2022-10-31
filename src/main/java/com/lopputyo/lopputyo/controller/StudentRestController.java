@@ -12,41 +12,40 @@ import java.util.List;
 public class StudentRestController {
 
     @Autowired
-    Services myService;
+    private Services myService;
 
-    @GetMapping("students")
+    @GetMapping("students") // Returns all students
     public List<Student> getStudents() {
         return myService.getStudents();
     }
 
-    @GetMapping("students/id/{id}")
+    @GetMapping("students/id/{id}") // Searches student by ID. students/id/ID_HERE
     public List<Student> getStudentById(@PathVariable int id) {
         return myService.getStudentsById(id);
     }
 
-    @GetMapping("students/name/{name}")
+    @GetMapping("students/name/{name}") // Searches student by name. students/name/NAME_HERE
     public List<Student> GetStudentByName(@PathVariable String name) {
         return myService.getStudentsByName(name);
     }
 
-    @GetMapping("courses")
+    @GetMapping("courses") // Returns all courses
     public List<Course> getCourse() {
         return myService.getCourses();
     }
 
-    @GetMapping("courses/id/{id}")
+    @GetMapping("courses/id/{id}") // Searches course by ID. courses/id/ID_HERE
     public List<Course> getCourseById(@PathVariable int id) {
         return myService.getCoursesById(id);
     }
 
-    @GetMapping("courses/name/{name}")
+    @GetMapping("courses/name/{name}") // Searches course by name. courses/name/NAME_HERE
     public List<Course> getCourseByName(@PathVariable String name) {
         return myService.getCoursesByName(name);
     }
 
-    // Student Lisätään "student": "nimi"
 
-    @PostMapping("addstudent")
+    @PostMapping("addstudent") // Adds student with JSON format. "student": "NAME_HERE"
     public String addStudent(@RequestBody Student student) {
         myService.students.add(student);
         myService.saveStudentsToFile();
@@ -54,36 +53,34 @@ public class StudentRestController {
 
     }
 
-    // Course Lisätään "course": "nimi"
-
-    @PostMapping("addcourse")
+    @PostMapping("addcourse") // Adds course with JSON format. "course": "NAME_HERE"
     public String addCourse(@RequestBody Course cours) {
         myService.courses.add(cours);
         myService.saveCoursesToFile();
         return "OK";
     }
 
-    @DeleteMapping("removestudent")
+    @DeleteMapping("removestudent") // Removes student using a parameter.
     public String removeStudent(@RequestParam String student) {
         myService.removeStudent(student);
         myService.saveStudentsToFile();
         return "OK";
     }
 
-    @DeleteMapping("removecourse")
+    @DeleteMapping("removecourse") // Removes student using a parameter.
     public String removeCourse(@RequestParam String course) {
         myService.removeCourse(course);
         myService.saveCoursesToFile();
         return "OK";
     }
 
-    @PutMapping("addtocourse")
+    @PutMapping("addtocourse") // Adds to course using parameters.
     public String addToCourse(@RequestParam String courseName, @RequestParam String studentName) {
         myService.addStudentToCourse(courseName, studentName);
         return "OK";
     }
 
-    @PutMapping("removefromcourse")
+    @PutMapping("removefromcourse") // Removes from course using parameters.
     public String removeFromCourse(@RequestParam String courseName, @RequestParam String studentName) {
         myService.removeStudentFromCourse(courseName, studentName);
         return "OK";

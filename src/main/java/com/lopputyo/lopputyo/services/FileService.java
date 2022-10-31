@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 @Service
 public class FileService {
+
     public void writeCoursesToFile(List<Course> courses) {
         try {
             FileWriter fw = new FileWriter(new File("C:\\students\\courses.txt"));
@@ -49,7 +50,6 @@ public class FileService {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error");
             e.printStackTrace();
         }
     }
@@ -63,7 +63,6 @@ public class FileService {
             }
             return students;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
             e.printStackTrace();
             return null;
         }
